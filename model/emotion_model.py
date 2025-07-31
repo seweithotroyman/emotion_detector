@@ -2,9 +2,9 @@ import torch
 from transformers import BertTokenizer, BertForSequenceClassification
 
 # Inisialisasi model dan tokenizer BERT (misalnya menggunakan pre-trained model)
-model_name = 'bert-base-uncased'  # Bisa diubah ke model yang sudah dilatih
+model_name = 'bert-base-uncased'
 tokenizer = BertTokenizer.from_pretrained(model_name)
-model = BertForSequenceClassification.from_pretrained(model_name, num_labels=8)  # 8 emosi sesuai Plutchik
+model = BertForSequenceClassification.from_pretrained(model_name, num_labels=8)
 
 # Fungsi untuk melakukan prediksi emosi
 def predict_emotion(feedback):
@@ -20,5 +20,4 @@ def predict_emotion(feedback):
     # Daftar emosi sesuai dengan label dari model
     emotion_labels = ['joy', 'sadness', 'fear', 'anger', 'surprise', 'anticipation', 'trust', 'disgust']
     
-    # Mengembalikan emosi yang diprediksi
     return emotion_labels[predicted_class]
