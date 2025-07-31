@@ -1,12 +1,31 @@
 import nltk
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+from nltk.stem import PorterStemmer
 
-love = ['sayang','cinta','rindu','bahagia']
-joy = ['gembira','suka','senang','suka cita','riang']
-surprise = ['terkejut','mengherankan','mencengangkan','mengagetkan','menterkejuntukan','keheranan','heran']
-anger = ['marah','kemarahan','berang','murka','dongkol']
-sadness =['sedih','pilu','sayu','rintih']
-fear = ['takut','khawatir','cemas','bimbang']
+# Download necessary resources
+nltk.download('punkt')
+nltk.download('stopwords')
 
-example_text = 'Beberapa rindu memang harus sembunyi-sembunyi. Bukan untuk disampaikan, hanya untuk dikirimkan lewat doa.'
-tokens = nltk.word_tokenize(example_text)
-print(tokens)
+# Preprocessing Function
+def preprocess(text):
+    # Lowercasing
+    text = text.lower()
+    
+    # Tokenization
+    tokens = word_tokenize(text)
+    
+    # Remove stopwords
+    stop_words = set(stopwords.words('english'))
+    tokens = [word for word in tokens if word not in stop_words]
+    
+    # Stemming
+    ps = PorterStemmer()
+    tokens = [ps.stem(word) for word in tokens]
+    
+    return " ".join(tokens)
+
+# Example usage
+feedback = "I am so happy with this product!"
+preprocessed_feedback = preprocess(feedback)
+print(preprocessed_feedback)
